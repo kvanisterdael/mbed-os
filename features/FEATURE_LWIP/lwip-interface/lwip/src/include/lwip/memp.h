@@ -91,7 +91,8 @@ extern const struct memp_desc* const memp_pools[MEMP_MAX];
  *   extern u8_t __attribute__((section(".onchip_mem"))) memp_memory_my_private_pool[];
  */
 #define LWIP_MEMPOOL_DECLARE(name,num,size,desc) \
-  LWIP_DECLARE_MEMORY_ALIGNED(memp_memory_ ## name ## _base, ((num) * (MEMP_SIZE + MEMP_ALIGN_SIZE(size)))); \
+  LWIP_DECLARE_MEMORY_ALIGNED(memp_memory_ ## name ## _base, ((num) * (MEMP_SIZE + MEMP_ALIGN_SIZE(size)))) \
+    __attribute__((section("AHBSRAM1"),aligned)); \
     \
   LWIP_MEMPOOL_DECLARE_STATS_INSTANCE(memp_stats_ ## name) \
     \
